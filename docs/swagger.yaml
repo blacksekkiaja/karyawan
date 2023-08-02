@@ -1,0 +1,133 @@
+basePath: /
+definitions:
+  models.Karyawan:
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API untuk CRUD data karyawan
+  title: Data Karyawan API
+  version: "1.0"
+paths:
+  /karyawan:
+    get:
+      description: Mengambil seluruh data karyawan
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Karyawan'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get All Karyawan
+    post:
+      consumes:
+      - application/json
+      description: Membuat data karyawan baru
+      parameters:
+      - description: Data karyawan yang ingin dibuat
+        in: body
+        name: karyawan
+        required: true
+        schema:
+          $ref: '#/definitions/models.Karyawan'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Karyawan'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Create Karyawan
+  /karyawan/{id}:
+    delete:
+      description: Menghapus data karyawan berdasarkan ID
+      parameters:
+      - description: ID Karyawan
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Delete Karyawan
+    get:
+      description: Mengambil data karyawan berdasarkan ID
+      parameters:
+      - description: ID Karyawan
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Karyawan'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Get Karyawan by ID
+    put:
+      consumes:
+      - application/json
+      description: Mengubah data karyawan berdasarkan ID
+      parameters:
+      - description: ID Karyawan
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Data karyawan yang ingin diubah
+        in: body
+        name: karyawan
+        required: true
+        schema:
+          $ref: '#/definitions/models.Karyawan'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Karyawan'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Update Karyawan
+swagger: "2.0"
